@@ -210,4 +210,48 @@ describe("ProductManagementRepository", () => {
         ];
         expect(listByCategory("Category 1")).toEqual(expectedProducts);
     });
+
+    it ("should return an empty array when there are no products with the given stock", () => {
+        expect(listByCategory("Category 1")).toEqual([]);
+    });
+
+    it ("should return the products with the given stock", () => {
+        const product = {
+            name: "Product 1",
+            category: "Category 1",
+            price: 100,
+            stock: 10,
+        };
+        const id = generateId();
+        mockGenerateId.mockReturnValue(id);
+        createProduct(product);
+
+        const product2 = {
+            name: "Product 2",
+            category: "Category 1",
+            price: 200,
+            stock: 10,
+        };
+        const id2 = generateId();
+        mockGenerateId.mockReturnValue(id2);
+        createProduct(product2);
+
+        const expectedProducts = [
+            {
+                id,
+                name: "Product 1",
+                category: "Category 1",
+                price: 100,
+                stock: 10,
+            },
+            {
+                id: id2,
+                name: "Product 2",
+                category: "Category 1",
+                price: 200,
+                stock: 10,
+            },
+        ];
+        expect(listByCategory("Category 1")).toEqual(expectedProducts);
+    });
 });
