@@ -63,3 +63,16 @@ export function getProductsByPriceHandler(req, res) {
     res.status(500).json({ error: "Internal Server Error" });
   }
 }
+
+export function getProductsByStockHandler(req, res) {
+  const stock = parseInt(req.params.stock);
+  try {
+    const products = productRepository.getProductsByStock(stock);
+    if (!products.length) {
+      return res.status(404).json({ error: "Products not found" });
+    }
+    res.json(products);
+  } catch (error) {
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+}
