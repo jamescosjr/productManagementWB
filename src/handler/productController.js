@@ -1,4 +1,13 @@
-import productRepository from "../repository/productRepository.js";
+import {
+  createProduct,
+  listProducts,
+  findProductById,
+  listByCategory,
+  listByPrice,
+  listByStock,
+  deleteProduct,
+  updateProduct,
+} from "../repository/productRepository.js";
 import { validateProduct } from "../utils/productValidator.js";
 
 export function createProductHandler(req, res) {
@@ -9,7 +18,7 @@ export function createProductHandler(req, res) {
   }
 
   try {
-    const newProduct = productRepository.createProduct(product);
+    const newProduct = createProduct(product);
     res.status(201).json(newProduct);
   } catch (error) {
     res.status(500).json({ error: "Internal Server Error" });
@@ -18,7 +27,7 @@ export function createProductHandler(req, res) {
 
 export function getProductsHandler(req, res) {
   try {
-    const products = productRepository.getProducts();
+    const products = listProducts();
     res.json(products);
   } catch (error) {
     res.status(500).json({ error: "Internal Server Error" });
@@ -28,7 +37,7 @@ export function getProductsHandler(req, res) {
 export function getProductByIdHandler(req, res) {
   const productId = req.params.id;
   try {
-    const product = productRepository.getProductById(productId);
+    const product = findProductById(productId);
     if (!product) {
       return res.status(404).json({ error: "Product not found" });
     }
@@ -41,7 +50,7 @@ export function getProductByIdHandler(req, res) {
 export function getProductsByCategoryHandler(req, res) {
   const category = req.params.category;
   try {
-    const products = productRepository.getProductsByCategory(category);
+    const products = listByCategory(category);
     if (!products.length) {
       return res.status(404).json({ error: "Products not found" });
     }
@@ -54,7 +63,7 @@ export function getProductsByCategoryHandler(req, res) {
 export function getProductsByPriceHandler(req, res) {
   const price = parseFloat(req.params.price);
   try {
-    const products = productRepository.getProductsByPrice(price);
+    const products = listByPrice(price);
     if (!products.length) {
       return res.status(404).json({ error: "Products not found" });
     }
@@ -67,11 +76,43 @@ export function getProductsByPriceHandler(req, res) {
 export function getProductsByStockHandler(req, res) {
   const stock = parseInt(req.params.stock);
   try {
-    const products = productRepository.getProductsByStock(stock);
+    const products = listByStock(stock);
     if (!products.length) {
       return res.status(404).json({ error: "Products not found" });
     }
     res.json(products);
+  } catch (error) {
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+}
+
+export async function updateProductHandler(req, res) {
+  const productId = req.params.id;
+  const product = req.body;
+  const isValidProduct = validateProduct(product);
+  if (!isValidProduct) {
+    return res.status(400).json({ error: "Invalid product" });
+  }
+
+  try {
+    const updatedProduct = await updateProduct(productId, product);
+    if (!updatedProduct) {
+      return res.status(404).json({ error: "Product not found" });
+    }
+    res.status(200).json(updatedProduct);
+  } catch (error) {
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+}
+
+export function deleteProductHandler(req, res) {
+  const productId = req.params.id;
+  try {
+    const deletedProduct = deleteProduct(productId);
+    if (!deletedProduct) {
+      return res.status(404).json({ error: "Product not found" });
+    }
+    res.status(204).end();
   } catch (error) {
     res.status(500).json({ error: "Internal Server Error" });
   }
