@@ -31,3 +31,21 @@ export function listByPrice(price) {
 export function listByStock(stock) {
     return products.filter((product) => product.stock === stock);
 }
+
+export function deleteProduct(id) {
+    const index = products.findIndex((product) => product.id === id);
+    if (index === -1) {
+        return false;
+    }
+    products.splice(index, 1);
+    return true;
+}
+
+export function updateProduct(id, newProduct) {
+    const index = products.findIndex((product) => product.id === id);
+    if (index === -1) {
+        return false;
+    }
+    products[index] = { ...newProduct, id };
+    return true;
+}
