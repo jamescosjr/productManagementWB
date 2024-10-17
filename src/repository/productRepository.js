@@ -20,3 +20,10 @@ export function findProductById(id) {
 export function findProductByName(name) {
     return products.find((product) => product.name === name);
 }
+export function listByCategory(category) {
+    return products.filter((product) => product.category === category);
+}
+
+export function listByPrice(price) {
+    return products.filter((product) => product.price === price);
+}
