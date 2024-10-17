@@ -27,3 +27,7 @@ export function listByCategory(category) {
 export function listByPrice(price) {
     return products.filter((product) => product.price === price);
 }
+
+export function listByStock(stock) {
+    return products.filter((product) => product.stock === stock);
+}
