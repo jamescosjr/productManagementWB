@@ -10,8 +10,6 @@ import {
 } from "../../handler/productController.js";
 import * as productRepository from "../../repository/productRepository.js";
 import * as productValidator from "../../utils/productValidator.js";
-import request from "supertest";
-import app from "../../../server.js";
 
 describe("Product Controller", () => {
   afterEach(() => {
