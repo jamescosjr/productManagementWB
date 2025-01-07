@@ -3,6 +3,9 @@ import {
     updateById,
     deleteById,
 } from '../../infrastructure/repositories/productRepositoryWrite.js';
+import {
+    getAllProducts,
+} from '../../infrastructure/repositories/productRepositoryRead.js';
 import { AppError } from '../error/customErros.js'
 
 export async function createProductService({ name, category, price, stock }) {
@@ -26,5 +29,13 @@ export async function deleteProductService(id) {
         return await deleteById(id);
     } catch (error) {
         throw new AppError(error.message || 'Error deleting the product', 500);
+    }
+}
+
+export async function getAllProductsService() {
+    try {
+        return await getAllProducts();
+    } catch (error) {
+        throw new AppError(error.message || 'Error getting the products', 500);
     }
 }

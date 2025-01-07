@@ -1,7 +1,7 @@
 import { Router } from "express";
 import {
     createProductHandler,
-    // getProductsHandler,
+    getProductsHandler,
     // getProductByIdHandler,
     // getProductsByCategoryHandler,
     // getProductsByPriceHandler,
@@ -14,7 +14,7 @@ import {
 const router = Router();
 
 router.post("/products", createProductHandler);
-// router.get("/products", getProductsHandler);
+router.get("/products", getProductsHandler);
 // router.get("/products/:id", getProductByIdHandler);
 // router.get("/products/category/:category", getProductsByCategoryHandler);
 // router.get("/products/price/:price", getProductsByPriceHandler);
