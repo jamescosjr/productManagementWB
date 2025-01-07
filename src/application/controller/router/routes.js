@@ -3,7 +3,7 @@ import {
     createProductHandler,
     getProductsHandler,
     getProductByIdHandler,
-    // getProductsByCategoryHandler,
+    getProductsByCategoryHandler,
     // getProductsByPriceHandler,
     // getProductsByStockHandler,
     updateProductHandler,
@@ -16,7 +16,7 @@ const router = Router();
 router.post("/products", createProductHandler);
 router.get("/products", getProductsHandler);
 router.get("/products/:id", getProductByIdHandler);
-// router.get("/products/category/:category", getProductsByCategoryHandler);
+router.get("/products/category/:category", getProductsByCategoryHandler);
 // router.get("/products/price/:price", getProductsByPriceHandler);
 // router.get("/products/stock/:stock", getProductsByStockHandler);
 router.put("/products/:id", updateProductHandler);

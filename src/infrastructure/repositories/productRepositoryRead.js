@@ -18,3 +18,12 @@ export async function getById(id) {
         throw new AppError(error.message, 500);
     }
 }
+
+export async function getByCategory(category) {
+    try{
+        const products = await Product.find({ category });
+        return products;
+    } catch (error) {
+        throw new AppError(error.message, 500);
+    }
+}
