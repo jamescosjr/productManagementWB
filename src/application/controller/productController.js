@@ -3,6 +3,7 @@ import {
     updateProductService,
     deleteProductService,
     getAllProductsService,
+    getByIdService,
  } from "../../domain/services/productService";
 import { AppError, ValidationError, NotFoundError } from "../../domain/error/customErros.js";
 import { validateProduct } from "../../domain/utils/productValidator.js";
@@ -62,6 +63,20 @@ export async function deleteProductHandler(req, res, next) {
 export async function getProductsHandler(req, res, next) {
     try{
         const result = await getAllProductsService();
+        res.status(200).json(result);
+    } catch (error) {
+        next(error);
+    }
+}
+
+export async function getProductByIdHandler(req, res, next) {
+    const { id } = req.params;
+
+    try{
+        const result = await getByIdService(id);
+        if(!result){
+            return next(new NotFoundError('Product not found'));
+        }
         res.status(200).json(result);
     } catch (error) {
         next(error);

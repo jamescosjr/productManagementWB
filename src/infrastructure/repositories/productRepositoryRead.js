@@ -9,3 +9,12 @@ export async function getAllProducts() {
         throw new AppError(error.message, 500);
     }
 }
+
+export async function getById(id) {
+    try{
+        const product = await Product.findById(id);
+        return product;
+    } catch(error){
+        throw new AppError(error.message, 500);
+    }
+}

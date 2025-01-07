@@ -5,6 +5,7 @@ import {
 } from '../../infrastructure/repositories/productRepositoryWrite.js';
 import {
     getAllProducts,
+    getById,
 } from '../../infrastructure/repositories/productRepositoryRead.js';
 import { AppError } from '../error/customErros.js'
 
@@ -37,5 +38,13 @@ export async function getAllProductsService() {
         return await getAllProducts();
     } catch (error) {
         throw new AppError(error.message || 'Error getting the products', 500);
+    }
+}
+
+export async function getByIdService(id) {
+    try {
+        return await getById(id);
+    } catch (error) {
+        throw new AppError(error.message || 'Error getting the product', 500);
     }
 }
