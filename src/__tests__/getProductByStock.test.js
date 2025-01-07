@@ -16,9 +16,9 @@ afterAll(async () => {
     await dbHandler.closeDatabase();
 });
 
-describe("GET /products/price/:price", () => {
+describe("GET /products/stock/:stock", () => {
     describe("success cases", () => {
-        it("should return 200 when getting a product by price", async () => {
+        it("should return 200 when getting a product by stock", async () => {
             const product = new Product({
                 name: "Product 1",
                 category: "Category 1",
@@ -27,7 +27,7 @@ describe("GET /products/price/:price", () => {
             });
             await product.save();
 
-            const response = await supertest(app).get(`/products/price/10`);
+            const response = await supertest(app).get(`/products/stock/10`);
 
             expect(response.status).toBe(200);
             expect(response.body).toEqual([{
@@ -39,8 +39,8 @@ describe("GET /products/price/:price", () => {
                 __v: 0
             }]);
         });
-        it("should return 200 and an empty array when there is no product with the price", async () => {
-            const response = await supertest(app).get(`/products/price/10`);
+        it("should return 200 and an empty array when there is no product with the stock", async () => {
+            const response = await supertest(app).get(`/products/stock/10`);
 
             expect(response.status).toBe(200);
             expect(response.body).toEqual([]);

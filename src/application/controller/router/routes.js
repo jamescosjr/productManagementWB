@@ -5,7 +5,7 @@ import {
     getProductByIdHandler,
     getProductsByCategoryHandler,
     getProductsByPriceHandler,
-    // getProductsByStockHandler,
+    getProductsByStockHandler,
     updateProductHandler,
     deleteProductHandler,
 
@@ -18,7 +18,7 @@ router.get("/products", getProductsHandler);
 router.get("/products/:id", getProductByIdHandler);
 router.get("/products/category/:category", getProductsByCategoryHandler);
 router.get("/products/price/:price", getProductsByPriceHandler);
-// router.get("/products/stock/:stock", getProductsByStockHandler);
+router.get("/products/stock/:stock", getProductsByStockHandler);
 router.put("/products/:id", updateProductHandler);
 router.delete("/products/:id", deleteProductHandler);
 

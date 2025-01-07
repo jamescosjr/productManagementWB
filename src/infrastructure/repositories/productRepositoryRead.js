@@ -36,3 +36,12 @@ export async function getByPrice(price) {
         throw new AppError(error.message, 500);
     }
 }
+
+export async function getByStock(stock) {
+    try{
+        const products = await Product.find({ stock });
+        return products;
+    } catch {
+        throw new AppError(error.message, 500);
+    }
+}
