@@ -1,6 +1,7 @@
 import {
     createProduct,
-    updateById
+    updateById,
+    deleteById,
 } from '../../infrastructure/repositories/productRepositoryWrite.js';
 import { AppError } from '../error/customErros.js'
 
@@ -19,3 +20,11 @@ export async function updateProductService(id, { name, category, price, stock })
         throw new AppError(error.message || 'Error updating the product', 500);
     }
 };
+
+export async function deleteProductService(id) {
+    try {
+        return await deleteById(id);
+    } catch (error) {
+        throw new AppError(error.message || 'Error deleting the product', 500);
+    }
+}

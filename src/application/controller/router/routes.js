@@ -7,7 +7,7 @@ import {
     // getProductsByPriceHandler,
     // getProductsByStockHandler,
     updateProductHandler,
-    // deleteProductHandler,
+    deleteProductHandler,
 
 } from "../productController";
 
@@ -20,6 +20,6 @@ router.post("/products", createProductHandler);
 // router.get("/products/price/:price", getProductsByPriceHandler);
 // router.get("/products/stock/:stock", getProductsByStockHandler);
 router.put("/products/:id", updateProductHandler);
-// router.delete("/products/:id", deleteProductHandler);
+router.delete("/products/:id", deleteProductHandler);
 
 export default router;
