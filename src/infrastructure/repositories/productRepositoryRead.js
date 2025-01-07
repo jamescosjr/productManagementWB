@@ -27,3 +27,12 @@ export async function getByCategory(category) {
         throw new AppError(error.message, 500);
     }
 }
+
+export async function getByPrice(price) {
+    try{
+        const products = await Product.find({ price });
+        return products;
+    } catch (error) {
+        throw new AppError(error.message, 500);
+    }
+}
