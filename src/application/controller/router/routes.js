@@ -9,7 +9,7 @@ import {
     updateProductHandler,
     deleteProductHandler,
 
-} from "../productController";
+} from "../productController.js";
 
 const router = Router();
 

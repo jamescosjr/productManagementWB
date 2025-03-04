@@ -7,7 +7,7 @@ import {
     getByCategoryService,
     getByPriceService,
     getByStockService,
- } from "../../domain/services/productService";
+ } from "../../domain/services/productService.js";
 import { AppError, ValidationError, NotFoundError } from "../../domain/error/customErros.js";
 import { validateProduct } from "../../domain/utils/productValidator.js";
 
