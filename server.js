@@ -6,6 +6,9 @@ import errorHandler from "./src/application/middleware/errorHandler.js";
 import { validate } from 'express-jsonschema';
 import yaml from 'js-yaml';
 import fs from 'fs';
+import cors from 'cors';
+
+app.use(cors());
 
 const schema = yaml.load(fs.readFileSync('./src/contracts/contract.yaml', 'utf8'));
 
